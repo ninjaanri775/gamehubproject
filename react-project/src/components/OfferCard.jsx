@@ -52,7 +52,7 @@ return (
       {offer.image && (
         <img
           className="offer-image"
-          src={`http://localhost:5000/${offer.image}`}
+        src={`${import.meta.env.VITE_API_URL}/${offer.image}`}
           alt={offer.name}
         />
       )}
