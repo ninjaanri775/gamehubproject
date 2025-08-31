@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import OfferCard from "./OfferCard";
 import { useNavigate } from "react-router-dom";
 
-// Mapping category names to icon filenames
+
 const categoryIcons = {
   basketball: "icon=Basketball (1).png",
   football: "icon=Football.png",
@@ -12,7 +12,6 @@ const categoryIcons = {
   Tennis: "icon=Tennis.png"
 };
 
-// Top Categories Sidebar
 export function TopCategoriesSidebar() {
   const navigate = useNavigate();
   const topCategories = ["football", "basketball", "padel", "gaming", "MMA", "Tennis"];
@@ -66,7 +65,7 @@ export function SportFieldsSidebar() {
   useEffect(() => {
     const fetchOffers = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/offers");
+const res = await fetch(`${import.meta.env.VITE_API_URL}/api/offers`);
         const data = await res.json();
         const sportOffers = data.filter((o) =>
           ["football", "basketball", "MMA"].includes(o.category)
@@ -76,6 +75,7 @@ export function SportFieldsSidebar() {
         setOffers(selected);
       } catch (err) {
         console.error("Error fetching sport offers:", err);
+        console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
       }
     };
     fetchOffers();
