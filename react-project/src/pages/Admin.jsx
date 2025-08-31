@@ -12,8 +12,8 @@ export default function Admin() {
     category: "",
   });
   const [image, setImage] = useState(null);
-  const [error, setError] = useState(""); // for API errors
-  const [success, setSuccess] = useState(""); // optional success message
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(""); 
 
   const allowedCategories = [
     "tennis",
@@ -44,7 +44,7 @@ export default function Admin() {
 
     const formData = new FormData();
 
-    // Append only non-empty fields; skip title if empty
+
     Object.keys(form).forEach((key) => {
       if (key === "title" && !form[key]) return;
       formData.append(key, form[key]);
@@ -53,7 +53,7 @@ export default function Admin() {
     if (image) formData.append("image", image);
 
     try {
-      const res = await fetch("http://localhost:5000/api/offers", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/offers`, {
         method: "POST",
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         body: formData,

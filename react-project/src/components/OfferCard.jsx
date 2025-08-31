@@ -20,7 +20,7 @@ export default function OfferCard({ offer, onRemoved }) {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:5000/api/offers/${offer._id}`, {
+const res = await fetch(`${import.meta.env.VITE_API_URL}/api/offers/${offer._id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -47,7 +47,7 @@ export default function OfferCard({ offer, onRemoved }) {
 
 return (
   <div className="offer-card">
-    {/* Image */}
+
     <div className="image-container">
       {offer.image && (
         <img
@@ -61,10 +61,10 @@ return (
       )}
     </div>
 
-    {/* Name */}
+
     <h3>{offer.name}</h3>
 
-    {/* Prices */}
+
     <div className="offer-prices">
       {offer.discount > 0 ? (
         <>
@@ -80,16 +80,15 @@ return (
       )}
     </div>
 
-    {/* Title */}
     {offer.title && <p className="offer-title">{offer.title}</p>}
 
-    {/* Location */}
+
     <div className="offer-location">
       <img src="/images/Vector.png" alt="" className="location-icon" />
       <span>{offer.location}</span>
     </div>
 
-    {/* Actions: Book Now + Favorite */}
+
     <div className="offer-actions" style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
       <button className="book-btn" onClick={handleBook}>
         Book Now
@@ -102,7 +101,6 @@ return (
       </button>
     </div>
 
-    {/* Admin Delete */}
     {user?.role === "admin" && (
       <div className="admin-buttons">
         <button onClick={handleDelete} disabled={loading}>

@@ -51,7 +51,7 @@ export default function Shop() {
     const fetchOffers = async () => {
       try {
         const search = getSearchQuery();
-        let query = `http://localhost:5000/api/offers?`;
+       let query = `${import.meta.env.VITE_API_URL}/api/offers?`;;
         if (search) query += `search=${encodeURIComponent(search)}&`;
         if (debouncedMin) query += `min=${debouncedMin}&`;
         if (debouncedMax) query += `max=${debouncedMax}&`;
@@ -134,11 +134,10 @@ export default function Shop() {
 
   return (
     <div>
-      {/* Removed search from navbar */}
+     
       <Navbar showSearchInNavbar={false} />
       <br /><br /><br /><br />
-
-      {/* Custom Search Bar */}
+    
       <form onSubmit={handleSearch} className="search-bar-wrapper">
         <div className="search-bar">
           <input className="searchingbar"
@@ -171,7 +170,7 @@ export default function Shop() {
             offer={offer}
             onUpdate={user?.isAdmin ? (o) => navigate("/admin", { state: { offerToEdit: o } }) : undefined}
             onDelete={user?.isAdmin ? async (id) => {
-              const res = await fetch(`http://localhost:5000/api/offers/${id}`, {
+              const res = await fetch(`${import.meta.env.VITE_API_URL}/api/offers/${id}`, {
                 method: "DELETE",
                 headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
               });
@@ -181,7 +180,7 @@ export default function Shop() {
         ))}
       </div>
 
-      {/* Modal */}
+  
       {isModalOpen && (
         <div
           className="modal-backdrop"

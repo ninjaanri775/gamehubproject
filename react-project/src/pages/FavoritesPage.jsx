@@ -13,21 +13,21 @@ export default function FavoritesPage() {
       if (!token) return;
 
       try {
-        const res = await fetch("http://localhost:5000/api/favorites", {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/offers`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
         if (!res.ok) throw new Error("Failed to fetch favorites");
 
         const data = await res.json();
-        setOffers(data); // data is already favorite offers from backend
+        setOffers(data); 
       } catch (err) {
         console.error(err);
       }
     }
 
     fetchFavorites();
-  }, [favorites]); // reload when favorites change
+  }, [favorites]); 
 
   return (
     <div className="favorites-page">

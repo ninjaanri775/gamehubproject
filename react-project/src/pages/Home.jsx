@@ -6,16 +6,15 @@ import OfferCard from "../components/OfferCard";
 import Banner from "../components/Banner";
 import Footer from "../components/Footer";
 import { AuthContext } from "../context/AuthContext";
-import SearchBar from "../components/SearchBar"; // ← add this
+import SearchBar from "../components/SearchBar"; 
 
 
 export default function Home() {
   const { user } = useContext(AuthContext);
 
-  // Delete handler can be passed to OfferCard if needed
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/offers/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/offers/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
@@ -39,13 +38,12 @@ export default function Home() {
       <Banner />
       <TopOffersSidebar />
 
-      {/* Top Categories Sidebar */}
       <TopCategoriesSidebar />
 
-      {/* Sport Fields Sidebar */}
+
       <SportFieldsSidebar />
 
-      {/* You can remove the All Offers grid completely if not needed */}
+    
        <Footer />
     </div>
   );
