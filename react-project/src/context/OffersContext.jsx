@@ -9,7 +9,7 @@ export const OffersProvider = ({ children }) => {
   useEffect(() => {
     const fetchOffers = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/offers");
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/offers`);
         const data = await res.json();
         setOffers(data);
       } catch (err) {
